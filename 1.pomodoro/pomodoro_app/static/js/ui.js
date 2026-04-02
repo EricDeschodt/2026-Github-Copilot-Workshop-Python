@@ -18,8 +18,8 @@ export function renderApp(state, stats, gamification) {
 
 function renderGamification(gamification) {
     const { xp, level, xp_for_next_level, streak, achievements } = gamification;
-    const xpInLevel = 100 - xp_for_next_level;
-    const xpProgress = `${xpInLevel}%`;
+    const xpProgressInCurrentLevel = 100 - xp_for_next_level;
+    const xpProgress = `${xpProgressInCurrentLevel}%`;
 
     document.querySelector("#level-badge").textContent = `Lv ${level}`;
     document.querySelector("#xp-label").textContent = `${xp} XP`;

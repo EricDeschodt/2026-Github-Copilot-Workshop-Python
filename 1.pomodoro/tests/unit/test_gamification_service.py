@@ -61,10 +61,6 @@ def test_calculate_streak_returns_zero_with_no_sessions() -> None:
 
 def test_calculate_streak_counts_consecutive_days_from_today() -> None:
     today = datetime.now(timezone.utc).date()
-    counts = {
-        today: 2,
-        today.replace(day=today.day - 1) if today.day > 1 else today: 1,
-    }
     # Build a 3-day streak to avoid dependency on current date
     d0 = today
     d1 = date.fromordinal(today.toordinal() - 1)
