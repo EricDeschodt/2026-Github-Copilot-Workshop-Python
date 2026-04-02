@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <main class="app-shell">
+        <section class="timer-card">
+            <header class="timer-header">
+                <h1>Pomodoro Timer</h1>
+                <div class="window-actions" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </header>
+
+            <p class="session-label" id="session-label">Focus session</p>
+
+            <section class="progress-panel" aria-label="Timer progress">
+                <div class="progress-ring" id="progress-ring" style="--progress: 1;">
+                    <div class="progress-ring__inner">
+                        <strong id="timer-display">25:00</strong>
+                    </div>
+                </div>
+            </section>
+
+            <section class="controls" aria-label="Timer controls">
+                <button class="button button--primary" id="start-pause-button" type="button">Start</button>
+                <button class="button button--secondary" id="reset-button" type="button">Reset</button>
+            </section>
+
+            <section class="stats-card" aria-label="Today's progress">
+                <div>
+                    <p class="stats-card__title">Today's progress</p>
+                </div>
+                <div class="stats-grid">
+                    <div>
+                        <strong id="sessions-completed">0</strong>
+                        <span>Completed</span>
+                    </div>
+                    <div>
+                        <strong id="focus-minutes">0 min</strong>
+                        <span>Focus time</span>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script type="module" src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
