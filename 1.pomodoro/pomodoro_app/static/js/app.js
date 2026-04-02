@@ -6,18 +6,20 @@ import {
 	startTimer,
 	tick,
 } from "./timer-core.js";
-import { renderApp } from "./ui.js";
+import { renderApp, renderWeeklyChart } from "./ui.js";
 
 let timerId = null;
 let config = null;
 let state = null;
 let stats = null;
+let gamification = null;
 
 async function bootstrap() {
-	[config, stats] = await Promise.all([fetchConfig(), fetchStats()]);
+	[config, stats, gamification] = await Promise.all([fetchConfig(), fetchStats(), fetchGamification()]);
 	state = createInitialState(config);
 	bindEvents();
-	renderApp(state, stats);
+	renderApp(state, stats, gamification);
+	renderWeeklyChart();
 }
 
 function bindEvents() {
@@ -34,13 +36,13 @@ function toggleStartPause() {
 		stopInterval();
 	}
 
-	renderApp(state, stats);
+	renderApp(state, stats, gamification);
 }
 
 function handleReset() {
 	stopInterval();
 	state = resetTimer(state, config);
-	renderApp(state, stats);
+	renderApp(state, stats, gamification);
 }
 
 function startInterval() {
@@ -54,13 +56,14 @@ function startInterval() {
 
 			if (finishedState.mode === "focus") {
 				await saveCompletedSession(finishedState);
-				stats = await fetchStats();
+				[stats, gamification] = await Promise.all([fetchStats(), fetchGamification()]);
+				renderWeeklyChart();
 			}
 
 			state = advanceSession(finishedState, config);
 		}
 
-		renderApp(state, stats);
+		renderApp(state, stats, gamification);
 	}, 1000);
 }
 
@@ -78,6 +81,11 @@ async function fetchConfig() {
 
 async function fetchStats() {
 	const response = await fetch("/api/stats/today");
+	return response.json();
+}
+
+async function fetchGamification() {
+	const response = await fetch("/api/stats/gamification");
 	return response.json();
 }
 

@@ -24,3 +24,6 @@ def test_create_app_registers_api_routes() -> None:
     assert "/api/config" in routes
     assert "/api/stats/today" in routes
     assert "/api/sessions" in routes
+    assert "/api/stats/gamification" in routes
+    assert "/api/stats/weekly" in routes
+    assert "/api/stats/monthly" in routes
