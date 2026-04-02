@@ -7,6 +7,7 @@ import {
 	tick,
 } from "./timer-core.js";
 import { renderApp } from "./ui.js";
+import { initParticleSystem, setParticlesActive } from "./particles.js";
 
 let timerId = null;
 let config = null;
@@ -16,6 +17,7 @@ let stats = null;
 async function bootstrap() {
 	[config, stats] = await Promise.all([fetchConfig(), fetchStats()]);
 	state = createInitialState(config);
+	initParticleSystem();
 	bindEvents();
 	renderApp(state, stats);
 }
@@ -34,12 +36,14 @@ function toggleStartPause() {
 		stopInterval();
 	}
 
+	setParticlesActive(state.isRunning && state.mode === "focus");
 	renderApp(state, stats);
 }
 
 function handleReset() {
 	stopInterval();
 	state = resetTimer(state, config);
+	setParticlesActive(false);
 	renderApp(state, stats);
 }
 
@@ -50,6 +54,7 @@ function startInterval() {
 
 		if (state.remainingSeconds === 0) {
 			stopInterval();
+			setParticlesActive(false);
 			const finishedState = state;
 
 			if (finishedState.mode === "focus") {
