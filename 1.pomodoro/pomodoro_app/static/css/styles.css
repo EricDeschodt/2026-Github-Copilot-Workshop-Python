@@ -211,3 +211,169 @@ body {
         width: 100%;
     }
 }
+
+/* ── Gamification card ─────────────────────────────────── */
+
+.gamification-card {
+    background: var(--panel-background);
+    border-radius: 20px;
+    padding: 22px 20px 18px;
+    margin-top: 14px;
+}
+
+.xp-bar-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.level-badge {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #fff;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+    border-radius: 999px;
+    padding: 3px 10px;
+    white-space: nowrap;
+}
+
+.xp-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    flex: 1;
+}
+
+.streak-badge {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--text-strong);
+    white-space: nowrap;
+}
+
+.xp-bar-track {
+    height: 8px;
+    border-radius: 999px;
+    background: var(--ring-track);
+    overflow: hidden;
+    margin-bottom: 6px;
+}
+
+.xp-bar-fill {
+    --xp-progress: 0%;
+    height: 100%;
+    width: var(--xp-progress);
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-deep) 100%);
+    transition: width 400ms ease;
+}
+
+.xp-next {
+    margin: 0 0 18px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-weight: 700;
+    text-align: right;
+}
+
+/* ── Achievements ──────────────────────────────────────── */
+
+.achievements-section {
+    margin-bottom: 18px;
+}
+
+.achievements-title,
+.chart-title {
+    margin: 0 0 12px;
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.achievements-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.achievement-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 10px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.45);
+    border: 1.5px solid rgba(109, 121, 242, 0.15);
+    cursor: default;
+    opacity: 0.5;
+    transition: opacity 200ms ease, transform 200ms ease;
+    min-width: 68px;
+    text-align: center;
+}
+
+.achievement-badge--unlocked {
+    opacity: 1;
+    border-color: rgba(109, 121, 242, 0.5);
+    box-shadow: 0 2px 8px rgba(109, 121, 242, 0.18);
+}
+
+.achievement-badge--unlocked:hover {
+    transform: translateY(-2px);
+}
+
+.achievement-icon {
+    font-size: 1.4rem;
+    line-height: 1;
+}
+
+.achievement-name {
+    font-size: 0.68rem;
+    font-weight: 800;
+    color: var(--text-strong);
+    line-height: 1.2;
+}
+
+/* ── Weekly bar chart ──────────────────────────────────── */
+
+.chart-section {
+    /* empty — child elements handle layout */
+}
+
+.bar-chart {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 6px;
+    height: 64px;
+}
+
+.bar-chart__bar-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+}
+
+.bar-chart__bar {
+    width: 100%;
+    border-radius: 6px 6px 0 0;
+    background: rgba(109, 121, 242, 0.25);
+    transition: height 400ms ease;
+    min-height: 4px;
+}
+
+.bar-chart__bar--active {
+    background: linear-gradient(180deg, var(--accent) 0%, var(--accent-deep) 100%);
+}
+
+.bar-chart__label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-align: center;
+}

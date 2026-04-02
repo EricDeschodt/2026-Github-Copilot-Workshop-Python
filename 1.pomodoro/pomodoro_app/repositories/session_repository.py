@@ -31,6 +31,22 @@ class SessionRepository:
                 """
             )
 
+    def list_range(self, start: datetime, end: datetime) -> list[SessionRecord]:
+        with self._connect() as connection:
+            rows = connection.execute(
+                """
+                SELECT session_type, duration_seconds, started_at, completed_at
+                FROM sessions
+                WHERE completed_at IS NOT NULL
+                  AND completed_at >= ?
+                  AND completed_at < ?
+                ORDER BY completed_at ASC
+                """,
+                (start.isoformat(), end.isoformat()),
+            ).fetchall()
+
+        return [self._row_to_session(row) for row in rows]
+
     def list_today(self) -> Iterable[SessionRecord]:
         now = self.time_provider.now().astimezone(timezone.utc)
         start_of_day = datetime(now.year, now.month, now.day, tzinfo=timezone.utc)
